@@ -156,22 +156,11 @@ filter {
 
 output {
   elasticsearch {
-# ECH deployment:
-#    hosts => "https://gbaird-01.es.us-east-1.aws.found.io:443"
-# Serverless project:
-#    hosts => "https://gb-pubsec-c7f63d.es.us-east-1.aws.elastic.cloud:443"
 # Data mesh clusters:
     ecs_compatibility => disabled
     hosts => "https://data-mesh.co.uk:443/cluster01/elastic"
-#    user => "logstash_internal"
-#    password => "healey07Sobs!"
     user => "elastic"
-    password => "backbone-morbidity-trims"
-# ECH deployment:
-#    api_key => "PfzPPZUBZ_f50OLXnE77:8cbj22wLSGi_nWgqt8Cx9w"
-# Serverless project:
-#    api_key => "5d88rZcB917k9Ydpaoib:NESY7AL5pPPUpSvEaVs-yg"
-#    ssl_enabled => true
+    password => "**************"
     ssl_verification_mode => "none"
     index => "police-data-stop-search"
     data_stream => "false"
