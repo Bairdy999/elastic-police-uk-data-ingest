@@ -1,0 +1,179 @@
+input {
+  file {
+#    path => "/opt/data/UK/Police/crime-data/2024-01/2024-01-avon-and-somerset-stop-and-search.csv"
+#    path => "/opt/data/UK/Police/crime-data/2024-01/2024-01-derbyshire-stop-and-search.csv"
+#    path => "/opt/data/UK/Police/crime-data/2024-01/2024-01-btp-stop-and-search.csv"n
+#    path => "/opt/data/UK/Police/crime-data/2020-*/*-stop-and-search.csv"
+    path => "/opt/data/UK/Police/crime-data/2024-*/*-metropolitan-stop-and-search.csv"
+    start_position => "beginning"
+  }
+}
+
+filter {
+  csv {
+    separator => ","
+    skip_header => true
+    columns => [
+      "[stop][type]",
+      "[stop][date]",
+      "[policing_operation][part_of]",
+      "[policing_operation][name]",
+      "[location][lat]",
+      "[location][lon]",
+      "[person][gender]",
+      "[person][age_range]",
+      "[person][self_defined_ethnicity]",
+      "[person][officer_defined_ethnicity]",
+      "[stop][legislation]",
+      "[stop][object_of_search]",
+      "[stop][outcome]",
+      "[stop][outcome_linked_to_search]",
+      "[stop][removal_of_clothing]"
+    ]
+
+    skip_empty_columns => true
+  }
+
+  if [policing_operation][part_of] {
+    mutate {
+      convert => {
+        "[policing_operation][part_of]" => "boolean"
+      }
+    }
+  } else {
+    mutate {
+      add_field => { "[policing_operation][part_of]" => false}
+    }
+  }
+
+  if [location][lat] {
+    mutate {
+      convert => {
+        "[location][lat]" => "float"
+      }
+    }
+  }
+
+  if [location][lon] {
+    mutate {
+      convert => {
+        "[location][lon]" => "float"
+      }
+    }
+  }
+
+  mutate {
+    convert => {
+      "[stop][outcome_linked_to_search]" => "boolean"
+      "[stop][removal_of_clothing]" => "boolean"
+    }
+  }
+
+  mutate {
+    copy => { "[log][file][path]" => "logfile" }
+  }
+# "/opt/data/UK/Police/crime-data/2024-01/2024-01-derbyshire-stop-and-search.csv"
+
+  mutate {
+    gsub => [
+# Remove superfluous parts of the filepath
+      "logfile", "/opt/data/UK/Police/crime-data/", "",
+      "logfile", "-stop-and-search.csv", ""
+    ]
+  }
+
+  dissect {
+    mapping => {
+      "logfile" => "%{[reporting][period]}/%{[reporting][year]}-%{[reporting][month]}-%{[force][reported_by]}"
+    }
+  }
+
+  mutate {
+    gsub => [
+      "[force][reported_by]", "-", " "
+    ]
+  }
+
+  if [force][reported_by] == "btp" {
+    mutate {
+      replace => { "[force][reported_by]" => "British transport police" }
+    }
+  }
+
+  if [force][reported_by] == "devon and cornwall" {
+    mutate {
+      replace => { "[force][reported_by]" => "Devon & Cornwall Police" }
+    }
+  }
+
+  if [force][reported_by] == "dyfed powys" {
+    mutate {
+      replace => { "[force][reported_by]" => "Dyfed-Powys Police" }
+    }
+  }
+
+  if [force][reported_by] == "metropolitan" {
+    mutate {
+      replace => { "[force][reported_by]" => "Metropolitan Police Service" }
+    }
+  }
+
+  if [force][reported_by] == "northern ireland" {
+    mutate {
+      replace => { "[force][reported_by]" => "Police Service of Northern Ireland" }
+    }
+  }
+
+  if [force][reported_by] in ["avon and somerset", "cambridgeshire", "cheshire", "cumbria", "derbyshire", "durham", "gloucestershire", "hampshire", "hertfordshire", "lancashire", "norfolk", "suffolk"] {
+    mutate {
+      replace => { "[force][reported_by]" => "%{[force][reported_by]} Constabulary" }
+    }
+  }
+
+  if [force][reported_by] in ["bedfordshire", "city of london", "cleveland", "dorset", "greater manchester", "gwent", "humberside", "kent", "leicestershire", "lincolnshire", "merseyside", "north wales", "north yorkshire", "northamptonshire", "northumbria", "nottinghamshire", "sourh wales", "south yorkshire", "staffordshire", "surrey", "sussex", "thames valley", "warwickshire", "west mercia", "west midlands", "west yorkshire"] {
+    mutate {
+      replace => { "[force][reported_by]" => "%{[force][reported_by]} Police" }
+    }
+  }
+
+#  mutate {
+#    capitalize => [ "[force][reported_by]" ]
+#  }
+
+
+  ruby {
+    code => 'event.set("[force][reported_by]", event.get("[force][reported_by]").split.map(&:capitalize).join(" "))'
+  }
+
+  mutate {
+    remove_field => [ "tmp1", "logfile", "event" ]
+  }
+
+#  mutate {
+#    split => { "logfile" => "/" }
+#  }
+}
+
+output {
+  elasticsearch {
+# ECH deployment:
+#    hosts => "https://gbaird-01.es.us-east-1.aws.found.io:443"
+# Serverless project:
+#    hosts => "https://gb-pubsec-c7f63d.es.us-east-1.aws.elastic.cloud:443"
+# Data mesh clusters:
+    ecs_compatibility => disabled
+    hosts => "https://data-mesh.co.uk:443/cluster01/elastic"
+#    user => "logstash_internal"
+#    password => "healey07Sobs!"
+    user => "elastic"
+    password => "backbone-morbidity-trims"
+# ECH deployment:
+#    api_key => "PfzPPZUBZ_f50OLXnE77:8cbj22wLSGi_nWgqt8Cx9w"
+# Serverless project:
+#    api_key => "5d88rZcB917k9Ydpaoib:NESY7AL5pPPUpSvEaVs-yg"
+#    ssl_enabled => true
+    ssl_verification_mode => "none"
+    index => "police-data-stop-search"
+    data_stream => "false"
+  }
+}

@@ -1,0 +1,3 @@
+- pipeline.id: police-stop-search-pipeline
+  path.config: "/usr/local/bin/logstash-8.17.2/config/police-stop-search-pipeline.yml"
+  pipeline.workers: 1

@@ -1,0 +1,64 @@
+{
+	"index_patterns": [
+		"police-data-street*"
+	],
+	"template": {
+		"mappings": {
+			"properties": {
+				"context": {
+					"type": "text"
+				},
+				"crime_id": {
+					"type": "keyword"
+				},
+				"crime_type": {
+					"type": "keyword"
+				},
+				"force": {
+					"properties": {
+						"falls_within": {
+							"type": "keyword",
+							"ignore_above": 256
+						},
+						"reported_by": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"location": {
+					"type": "geo_point"
+				},
+				"location_text": {
+					"type": "text"
+				},
+				"lsoa": {
+					"properties": {
+						"code": {
+							"type": "keyword",
+							"ignore_above": 256
+						},
+						"name": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"reporting": {
+					"properties": {
+						"month": {
+							"type": "integer"
+						},
+						"period": {
+							"type": "date",
+							"format": "yyyy-MM"
+						},
+						"year": {
+							"type": "integer"
+						}
+					}
+				}
+			}
+		}
+	}
+}
