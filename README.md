@@ -15,7 +15,7 @@ Data can be downloaded from the following links:
 > [!TIP]
 > The latest [data archive](https://data.police.uk/data/archive/latest.zip) can be downloaded each month as soon as it's published. This allows the data to be kept up to date if required
 
-# Ingesting UK Police data into Elasticsearch
+# Using UK Police data with Elasticsearch
 ## Rich Data Sets
 Given the public nature of the data, the data content itself (including geopoint and location data) and the volume of data available, it makes an ideal candidate for ingesting into Elasticsearch. The data sets are suitable for exploring several concepts when using Elasticsearch and making use of its' latest capabilities.
 ## Data Mesh Usage
@@ -27,5 +27,17 @@ Additionally, given the segmented nature of the data into discrete data sets per
 
 
 ## Logstash Pipelines
+
+# Ingesting UK Police data into Elasticsearch
+
+## Data file and folder structure
+
+
+## Running Logstash to ingest the data
+### Ingesting into a single Elasticsearch cluster
+
+
+### Ingesting into an Elastic Data Mesh
+
 
 
