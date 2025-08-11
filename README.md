@@ -19,7 +19,7 @@ Data can be downloaded from the following links:
 ## Rich Data Sets
 Given the public nature of the data, the data content itself (including geopoint and location data) and the volume of data available, it makes an ideal candidate for ingesting into Elasticsearch. The data sets are suitable for exploring several concepts when using Elasticsearch and making use of its' latest capabilities.
 ## Data Mesh Usage
-Additionally, given the segmented nature of the data into discrete data sets per UK Police Force, it is ideal for use in proof-of-concepts relating to implementing an [Elastic Data Mesh](https://github.com/Bairdy999/elastic-data-mesh). Data specific to a given Force can be ingested into each Elasticsearch cluster in such a data mesh and cross-cluster-search utilised to search across the data in each cluster in the data mesh.
+Additionally, given the segmented nature of the data into discrete data sets per UK Police Force, it is ideal for use in proof-of-concepts relating to implementing an [Elastic Data Mesh](https://github.com/Bairdy999/elastic-data-mesh). Data specific to a given Force can be ingested into each Elasticsearch cluster in such a data mesh and cross-cluster-search utilised to search across the data in all clusters in the data mesh.
 
 # Elastic Stack Artefacts
 ## Index Templates
