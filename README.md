@@ -25,6 +25,7 @@ Additionally, given the segmented nature of the data into discrete data sets per
 ## Index Templates
 <details>
   <summary>police-data-stop-search</summary>summary
+```
 PUT _index_template/police_data_stop_search_template
 {
   "index_patterns": [
@@ -126,6 +127,7 @@ PUT _index_template/police_data_stop_search_template
     }
   }
 }
+```
 </details>
 
 ## Logstash Pipelines
