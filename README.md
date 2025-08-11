@@ -24,9 +24,9 @@ Additionally, given the segmented nature of the data into discrete data sets per
 # Elastic Stack Artefacts
 ## Index Templates
 <details>
-  <summary>police-data-stop-search</summary>summary
-```
-PUT _index_template/police_data_stop_search_template
+  <summary>police-data-stop-search</summary>
+
+```PUT _index_template/police_data_stop_search_template
 {
   "index_patterns": [
     police-data-stop-search*"
@@ -126,8 +126,7 @@ PUT _index_template/police_data_stop_search_template
       }
     }
   }
-}
-```
+}```
 </details>
 
 ## Logstash Pipelines
