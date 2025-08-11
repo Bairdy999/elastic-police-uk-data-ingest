@@ -1,10 +1,7 @@
 input {
   file {
-#    path => "/opt/data/UK/Police/crime-data/2024-01/2024-01-avon-and-somerset-stop-and-search.csv"
-#    path => "/opt/data/UK/Police/crime-data/2024-01/2024-01-derbyshire-stop-and-search.csv"
-#    path => "/opt/data/UK/Police/crime-data/2024-01/2024-01-btp-stop-and-search.csv"n
-#    path => "/opt/data/UK/Police/crime-data/2020-*/*-stop-and-search.csv"
-    path => "/opt/data/UK/Police/crime-data/2024-*/*-metropolitan-stop-and-search.csv"
+# Point to the required stop and search CSV file(s)
+    path => "/opt/data/UK/Police/crime-data/<year_range>/*-<force_name>-stop-and-search.csv"
     start_position => "beginning"
   }
 }
@@ -13,6 +10,7 @@ filter {
   csv {
     separator => ","
     skip_header => true
+# Map the CSV fields to the relevant index fields
     columns => [
       "[stop][type]",
       "[stop][date]",
@@ -30,10 +28,10 @@ filter {
       "[stop][outcome_linked_to_search]",
       "[stop][removal_of_clothing]"
     ]
-
+# Ignore empty values in any of the columns. The default value is false if not specified and we want to continue if there are empty values
     skip_empty_columns => true
   }
-
+# The CSV filter maps boolean values as strings so convert to boolean where required:
   if [policing_operation][part_of] {
     mutate {
       convert => {
@@ -41,11 +39,13 @@ filter {
       }
     }
   } else {
+# And add a default value of false if it doesn't exist
     mutate {
       add_field => { "[policing_operation][part_of]" => false}
     }
   }
 
+# Convert the lat/lon co-ordinates to float so they can be correctly ingested as a geopoint value:
   if [location][lat] {
     mutate {
       convert => {
@@ -61,7 +61,7 @@ filter {
       }
     }
   }
-
+# The CSV filter maps boolean values as strings so convert to boolean where required:
   mutate {
     convert => {
       "[stop][outcome_linked_to_search]" => "boolean"
@@ -76,27 +76,30 @@ filter {
 
   mutate {
     gsub => [
-# Remove superfluous parts of the filepath
+# Remove superfluous parts of the filepath to get the reporting period and Force name as it isn't in the actual data:
       "logfile", "/opt/data/UK/Police/crime-data/", "",
       "logfile", "-stop-and-search.csv", ""
     ]
   }
 
+# And parse the logfile name to determine the reporting period and reporting Force as it only exists in the filename and not in the data:
   dissect {
     mapping => {
       "logfile" => "%{[reporting][period]}/%{[reporting][year]}-%{[reporting][month]}-%{[force][reported_by]}"
     }
   }
 
+# Convert any hyphens to spaces for readability
   mutate {
     gsub => [
       "[force][reported_by]", "-", " "
     ]
   }
 
+# And convert each Force name to camel case with the correct Force naming terminology:
   if [force][reported_by] == "btp" {
     mutate {
-      replace => { "[force][reported_by]" => "British transport police" }
+      replace => { "[force][reported_by]" => "British Transport Police" }
     }
   }
 
@@ -136,29 +139,21 @@ filter {
     }
   }
 
-#  mutate {
-#    capitalize => [ "[force][reported_by]" ]
-#  }
-
-
   ruby {
     code => 'event.set("[force][reported_by]", event.get("[force][reported_by]").split.map(&:capitalize).join(" "))'
   }
 
+# Finally remove any superfluous fields that aren't required:
   mutate {
     remove_field => [ "tmp1", "logfile", "event" ]
   }
-
-#  mutate {
-#    split => { "logfile" => "/" }
-#  }
 }
 
+# Output to the relevant Elasticsearch cluster:
 output {
   elasticsearch {
-# Data mesh clusters:
     ecs_compatibility => disabled
-    hosts => "https://data-mesh.co.uk:443/cluster01/elastic"
+    hosts => "https://<cluster_url>:<cluster_http_port>/<extra_uri>"
     user => "elastic"
     password => "**************"
     ssl_verification_mode => "none"
