@@ -23,8 +23,110 @@ Additionally, given the segmented nature of the data into discrete data sets per
 
 # Elastic Stack Artefacts
 ## Index Templates
-
-
+<details>
+  <summary>police-data-stop-search</summary>summary
+PUT _index_template/police_data_stop_search_template
+{
+  "index_patterns": [
+    police-data-stop-search*"
+  ],
+  "template": {
+    "mappings": {
+      "properties": {
+        "force": {
+          "properties": {
+            "falls_within": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "reported_by": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "location": {
+          "type": "geo_point"
+        },
+        "person": {
+          "properties": {
+            "age_range": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "gender": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "officer_defined_ethnicity": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "self_defined_ethnicity": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "policing_operation": {
+          "properties": {
+            "part_of": {
+              "type": "boolean"
+            },
+            "name": {
+              "type": "keyword",
+              "ignore_above": 1024
+            }
+          }
+        },
+        "reporting": {
+          "properties": {
+            "month": {
+              "type": "integer"
+            },
+            "period": {
+              "type": "date",
+              "format": "yyyy-MM",
+              "copy_to": "stop_search_content"
+            },
+            "year": {
+              "type": "integer"
+            }
+          }
+        },
+        "stop": {
+          "properties": {
+            "date": {
+              "type": "date"
+            },
+            "legislation": {
+              "type": "text"
+            },
+            "object_of_search": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "outcome": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "outcome_linked_to_search": {
+              "type": "boolean"
+            },
+            "removal_of_clothing": {
+              "type": "boolean"
+            },
+            "type": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</details>
 
 ## Logstash Pipelines
 
