@@ -7,10 +7,10 @@ The UK Police Service, via the UK Home Office, makes a number of policing-relate
 ## Downloading UK Police Data
 Data can be downloaded from the following sites:
 
-| Data Type | Raw URL | Description |
+| Download Type | Raw URL | Description |
 | -- | -- | -- |
-| [](https://data.police.uk/data/) |  |  |
-|[](https://data.police.uk/data/archive/) |  |  |
+| [Custom Download](https://data.police.uk/data/) | https://data.police.uk/data/ |  |
+| [Archive Dowbload](https://data.police.uk/data/archive/) | https://data.police.uk/data/archive |  |
 
 # Ingesting UK Police data into Elasticsearch
 
