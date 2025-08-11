@@ -128,7 +128,7 @@ Additionally, given the segmented nature of the data into discrete data sets per
   }
 }```
 </details>
-
+  
 ## Logstash Pipelines
 
 # Ingesting UK Police data into Elasticsearch
