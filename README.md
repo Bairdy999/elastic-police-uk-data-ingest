@@ -1,5 +1,5 @@
 # UK Policing - Public Domain Data
-The UK Police Service, via the UK Home Office, makes a number of policing-related data sets available publically for download. These data sets are (usually) available for all 43 Forces in England and Wales and consist of the following:
+The UK Police Service, via the UK Home Office, makes a number of policing-related data sets available publically for download. These data sets are (usually) available for all 43 Forces in England and Wales and consist of the following three types of data:
 - Reported crimes for a given location, in a given period per Force 
 - Crime outcomes for all crimes reported in a given period per Force
 - Stop-and-search statistics recorded in a given period by each Force
@@ -9,13 +9,17 @@ Data can be downloaded from the following links:
 
 | Download Type | Raw URL | Description |
 | -- | -- | -- |
-| [Custom Download](https://data.police.uk/data/) | https://data.police.uk/data/ | Allows data for any period up to the last 3 years to be downloaded for individual, multiple, or all, Forces. The three data sets listed above can be optionally included in the download |
+| [Custom Download](https://data.police.uk/data/) | https://data.police.uk/data/ | Allows data for any period up to the last 3 years to be downloaded for individual, multiple, or all, Forces. The three data types listed above can be optionally included in the download |
 | [Archive Dowbload](https://data.police.uk/data/archive/) | https://data.police.uk/data/archive | Allows all data for all Forces to be downloaded for predefined periods going back to December 2013. Note that each available download covers a number of months over several years, with overlaps |
   
 > [!TIP]
 > The latest [data archive](https://data.police.uk/data/archive/latest.zip) can be downloaded each month as soon as it's published. This allows the data to be kept up to date if required
 
 # Ingesting UK Police data into Elasticsearch
+## Rich Data Sets
+Given the public nature of the data, the data content itself (including geopoint and location data) and the volume of data available, it makes an ideal candidate for ingesting into Elasticsearch. The data sets are suitable for exploring several concepts when using Elasticsearch and making use of its' latest capabilities.
+## Data Mesh Usage
+Additionally, given the segmented nature of the data into discrete data sets per UK Police Force, it is ideal for use in proof-of-concepts relating to implementing an [Elastic Data Mesh](). Data specific to a given Force can be ingested into each Elasticsearch cluster in such a data mesh.
 
 ## Index Templates
 
