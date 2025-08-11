@@ -23,8 +23,8 @@ Additionally, given the segmented nature of the data into discrete data sets per
 
 # Elastic Stack Artefacts
 ## Index Templates
+[police-data-stop-search.json](Elasticsearch/templates/police-data-stop-search.json)
 <details>
-  [police-data-stop-search.json](Elasticsearch/templates/police-data-stop-search.json)
   <summary>police-data-stop-search.json</summary>
   
 ```
