@@ -21,6 +21,7 @@ Given the public nature of the data, the data content itself (including geopoint
 ## Data Mesh Usage
 Additionally, given the segmented nature of the data into discrete data sets per UK Police Force, it is ideal for use in proof-of-concepts relating to implementing an [Elastic Data Mesh](). Data specific to a given Force can be ingested into each Elasticsearch cluster in such a data mesh.
 
+# Elastic Stack Artefacts
 ## Index Templates
 
 
