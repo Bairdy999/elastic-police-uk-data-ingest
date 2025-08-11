@@ -25,8 +25,9 @@ Additionally, given the segmented nature of the data into discrete data sets per
 ## Index Templates
 <details>
   <summary>police-data-stop-search</summary>
-
-```PUT _index_template/police_data_stop_search_template
+  
+```
+PUT _index_template/police_data_stop_search_template
 {
   "index_patterns": [
     police-data-stop-search*"
@@ -126,9 +127,10 @@ Additionally, given the segmented nature of the data into discrete data sets per
       }
     }
   }
-}```
+}
+```
 </details>
-  
+    
 ## Logstash Pipelines
 
 # Ingesting UK Police data into Elasticsearch
