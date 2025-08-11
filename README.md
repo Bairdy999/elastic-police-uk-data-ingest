@@ -5,7 +5,7 @@ The UK Police Service, via the UK Home Office, makes a number of policing-relate
 - Stop-and-search statistics recorded in a given period by each Force
 
 ## Downloading UK Police Data
-Data can be downloaded from the following sites:
+Data can be downloaded from the following links:
 
 | Download Type | Raw URL | Description |
 | -- | -- | -- |
