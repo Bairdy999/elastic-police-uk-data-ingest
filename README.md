@@ -170,17 +170,25 @@ Assuming the Police data has been unzipped to `/opt/data/UK/Police/crime-data`, 
 | `/opt/data/UK/Police/crime-data/2022*/*-cambridgeshire-stop-and-search.csv` | Stop-and-search CSV files for Cambridgeshire only, for all months in 2022 |  
 
 Any required combinations of the above can be configured as file input paths
+### Ingesting stop-and-search data
+
 > [!IMPORTANT]
 > Logstash is designed to keep running and monitor configured input paths for any new data. In this instance once the relevant data has been ingested, there will obviously be no new data so Logstash will keep running whilst not actually processing anything. It is therefore advised to monitor Logstash output (e.g. to stdout, tailing the log file, etc) and kill the Logstash process once it has been determined that all data has been loaded.
 > Alternatively, use Kibana Discover to check the data that's been ingested for the requried date range and kill the Logstash process accordingly.
 >   
 > There's probably a way of wrapping the Logstash ingest runs in a shell script, read the required data files and pass to Logstash via a stdin input, or to have Logstash listen on an HTTP input and process/terminate accordingly. Answers on a postcard please!!
 
-### Ingesting stop-and-search data
 #### Ingesting into a single Elasticsearch cluster
 
 
 #### Ingesting into an Elastic Data Mesh
 
 
+
+## UK Police Street (Crime Locations) Data
+Coming soon!  
+  
+
+### Index template for police-data-street
+Coming soon!
 
