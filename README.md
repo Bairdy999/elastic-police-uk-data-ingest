@@ -190,5 +190,5 @@ Coming soon!
   
 
 ### Index template for police-data-street
-Coming soon!
+To make full use of the ingested crime locations data, the [police-data-street.json](Elasticsearch/templates/police-data-street.json) index template should be installed in the target Elasticsearch cluster.
 
