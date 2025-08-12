@@ -22,11 +22,12 @@ Given the public nature of the data, the data content itself (including geopoint
 Additionally, given the segmented nature of the data into discrete data sets per UK Police Force, it is ideal for use in proof-of-concepts relating to implementing an [Elastic Data Mesh](https://github.com/Bairdy999/elastic-data-mesh). Data specific to a given Force can be ingested into each Elasticsearch cluster in such a data mesh and cross-cluster-search utilised to search across the data in all clusters in the data mesh.
 
 
-# Ingesting UK Police data into Elasticsearch
+# Ingesting UK Police stop-and-search data into Elasticsearch
 
-## Elasticsearch Index Templates
-### Index template for police-data-stop-search
-[police-data-stop-search.json](Elasticsearch/templates/police-data-stop-search.json)
+## Index template for police-data-stop-search
+To make full use of the ingested stop and search data, the [police-data-stop-search.json](Elasticsearch/templates/police-data-stop-search.json) index template should be installed in the target Elasticsearch cluster.
+
+
 <details>
   <summary>police-data-stop-search.json</summary>
   
@@ -169,7 +170,7 @@ Any required combinations of the above can be configured as file input paths
 > Logstash is designed to keep running and monitor configured input paths for any new data. In this instance once the relevant data has been ingested, there will obviously be no new data so Logstash will keep running whilst not actually processing anything. It is therefore advised to monitor Logstash output (e.g. to stdout, tailing the log file, etc) and kill the Logstash process once it has been determined that all data has been loaded.
 > Alternatively, use Kibana Discover to check the data that's been ingested for the requried date range and kill the Logstash process accordingly.
 >   
-> There's probably a way of wrapping the Logstash ingest runs in a shell script, read the required data files and pass to Logstash via a stdin input, or to have Logstash listen on an HTTP input and process accordingly. Answers on a postcard please!!
+> There's probably a way of wrapping the Logstash ingest runs in a shell script, read the required data files and pass to Logstash via a stdin input, or to have Logstash listen on an HTTP input and process/terminate accordingly. Answers on a postcard please!!
 
 ### Ingesting stop-and-search data
 #### Ingesting into a single Elasticsearch cluster
