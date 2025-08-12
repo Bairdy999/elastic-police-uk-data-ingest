@@ -139,6 +139,9 @@ PUT _index_template/police_data_stop_search_template
 ## Data file and folder structure
 
 
+<img width="881" height="468" alt="image" src="https://github.com/user-attachments/assets/e9b87ba5-ec69-4c24-ab7c-5e03a4c01e36" />
+
+
 ## Running Logstash to ingest the data
 ### Ingesting into a single Elasticsearch cluster
 
