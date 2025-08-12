@@ -25,6 +25,20 @@ Additionally, given the segmented nature of the data into discrete data sets per
 # Ingesting UK Police data into Elasticsearch
 Firstly, download the required data sets as per the guidance given above, unzip to a location of your choice and then follow each of the steps below:
 
+### Examine fhe file and folder structure
+The data is downloaded in a single .zip file per download that contains a number of folders for each month/year, with a number of CSV files per force for the same period in each month folder. For example, given a download containing data for 2022:
+- Folders in the downloaded .zip file will be of the format YYYY-MM, i.e. for 2022 it will be 2022-01 through to 2022-12
+- For each Force, there are up to three CSV files for each month, for each of Street, Outcomes and Stop-and-search data
+- The CSV files are of the format YYYY-MM-<force_name><data_type>.csv, e.g for Cambridgeshire, the following files will exist:
+  - `2022-01-cambridgeshire-outcomes.csv`
+  - `2022-01-cambridgeshire-stop-and-search.csv`
+  - `2022-01-cambridgeshire-street.csv`
+- The above is repeated for each Force in each month/year folder
+
+To illustrate the file structure, the structure for 2022 is shown in the image below:  
+
+<img width="876" height="562" alt="image" src="https://github.com/user-attachments/assets/599d41e0-4519-443d-b083-5f9e8b2d8ff4" />  
+  
 ## UK Police Stop and Search Data
 
 ### Index template for police-data-stop-search
@@ -141,19 +155,7 @@ PUT _index_template/police_data_stop_search_template
 
 ## Configuring Logstash to ingest stop-and-search data
 
-### Examine fhe file and folder structure
-The data is downloaded in a single .zip file per download that contains a number of folders for each month/year, with a number of CSV files per force for the same period in each month folder. For example, given a download containing data for 2022:
-- Folders in the downloaded .zip file will be of the format YYYY-MM, i.e. for 2022 it will be 2022-01 through to 2022-12
-- For each Force, there are up to three CSV files for each month, for each of Street, Outcomes and Stop-and-search data
-- The CSV files are of the format YYYY-MM-<force_name><data_type>.csv, e.g for Cambridgeshire, the following files will exist:
-  - `2022-01-cambridgeshire-outcomes.csv`
-  - `2022-01-cambridgeshire-stop-and-search.csv`
-  - `2022-01-cambridgeshire-street.csv`
-- The above is repeated for each Force in each month/year folder
 
-To illustrate the file structure, the structure for 2022 is shown in the image below:  
-
-<img width="876" height="562" alt="image" src="https://github.com/user-attachments/assets/599d41e0-4519-443d-b083-5f9e8b2d8ff4" />
 
 ### Determine the required data files for ingest
 Assuming the Police data has been unzipped to `/opt/data/UK/Police/crime-data`, the following example file input path combinations (not exhaustive!) can be used to ingest stop-and-search data to Elasticsearch using Logstash. The CSV files themselves will be of the format:
