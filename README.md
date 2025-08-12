@@ -136,7 +136,7 @@ PUT _index_template/police_data_stop_search_template
 </details>
 
 ## Running Logstash to ingest the data
-Download the required data as per the guidance given above  
+Firstly, download the required data sets as per the guidance given above, unzip to a location of your choice and then follow each of the steps below:
 
 ### Examine fhe file and folder structure
 The data is downloaded in a single .zip file per download that contains a number of folders for each month/year, with a number of CSV files per force for the same period in each month folder. For example, given a download containing data for 2022:
