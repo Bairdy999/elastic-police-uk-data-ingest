@@ -141,9 +141,9 @@ The data is downloaded in a single .zip file per download that contains a number
 - Folders in the downloaded .zip file will be of the format YYYY-MM, i.e. for 2022 it will be 2022-01 through to 2022-12
 - For each Force, there are up to three CSV files for each month, for each of Street, Outcomes and Stop-and-search data
 - The CSV files are of the format YYYY-MM-<force_name><data_type>.csv, e.g for Cambridgeshire, the following files will exist:
-  - 2022-01-cambridgeshire-outcomes.csv
-  - 2022-01-cambridgeshire-stop-and-search.csv
-  - 2022-01-cambridgeshire-street.csv
+  - `2022-01-cambridgeshire-outcomes.csv`
+  - `2022-01-cambridgeshire-stop-and-search.csv`
+  - `2022-01-cambridgeshire-street.csv`
 - The above is repeated for each Force in each month/year folder
 
 To illustrate the file structure, the structure for 2022 is shown in the image below:  
@@ -152,6 +152,14 @@ To illustrate the file structure, the structure for 2022 is shown in the image b
 
 
 ## Running Logstash to ingest the data
+
+Assuming the Police data has been unzipped to `/opt/data/UK/Police/crime-data`, the following file input path combinations can be used to ingest the data to Elasticsearch using Logstash. The CSV files themselves will be of the format:
+- `/opt/data/UK/Police/crime-data/YYYY-MM/YYYY-MM-<force_name>-<data_type).csv`
+
+| File Input Path | Files Matched |
+| -- | -- |
+!     `/opt/data/UK/Police/crime-data/*/*-stop-and-search.csv` | Stop-and-search CSV files for all Forces, for all year/month periods  | 
+
 ### Ingesting into a single Elasticsearch cluster
 
 
