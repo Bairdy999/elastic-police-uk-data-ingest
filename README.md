@@ -158,11 +158,11 @@ Assuming the Police data has been unzipped to `/opt/data/UK/Police/crime-data`, 
 
 | File Input Path | Files Matched |
 | -- | -- |
-! `/opt/data/UK/Police/crime-data/*/*-stop-and-search.csv` | Stop-and-search CSV files for all Forces, for all available year/month periods |
-! `/opt/data/UK/Police/crime-data/2022*/*-stop-and-search.csv` | Stop-and-search CSV files for all Forces, for all months in 2022 |
-! `/opt/data/UK/Police/crime-data/2022-01/*-stop-and-search.csv` | Stop-and-search CSV files for all Forces, for January 2022 |
-! `/opt/data/UK/Police/crime-data/*/*-cambridgeshire-stop-and-search.csv` | Stop-and-search CSV files for Cambridgeshire only, for all available year/month periods |
-! `/opt/data/UK/Police/crime-data/2022*/*-cambridgeshire-stop-and-search.csv` | Stop-and-search CSV files for Cambridgeshire only, for all months in 2022 |  
+| `/opt/data/UK/Police/crime-data/*/*-stop-and-search.csv` | Stop-and-search CSV files for all Forces, for all available year/month periods |
+| `/opt/data/UK/Police/crime-data/2022*/*-stop-and-search.csv` | Stop-and-search CSV files for all Forces, for all months in 2022 |
+| `/opt/data/UK/Police/crime-data/2022-01/*-stop-and-search.csv` | Stop-and-search CSV files for all Forces, for January 2022 |
+| `/opt/data/UK/Police/crime-data/*/*-cambridgeshire-stop-and-search.csv` | Stop-and-search CSV files for Cambridgeshire only, for all available year/month periods |
+| `/opt/data/UK/Police/crime-data/2022*/*-cambridgeshire-stop-and-search.csv` | Stop-and-search CSV files for Cambridgeshire only, for all months in 2022 |  
 
 Any required combinations of the above can be configured as file input paths
 > [!IMPORTANT]
