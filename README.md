@@ -22,9 +22,12 @@ Given the public nature of the data, the data content itself (including geopoint
 Additionally, given the segmented nature of the data into discrete data sets per UK Police Force, it is ideal for use in proof-of-concepts relating to implementing an [Elastic Data Mesh](https://github.com/Bairdy999/elastic-data-mesh). Data specific to a given Force can be ingested into each Elasticsearch cluster in such a data mesh and cross-cluster-search utilised to search across the data in all clusters in the data mesh.
 
 
-# Ingesting UK Police stop-and-search data into Elasticsearch
+# Ingesting UK Police data into Elasticsearch
+Firstly, download the required data sets as per the guidance given above, unzip to a location of your choice and then follow each of the steps below:
 
-## Index template for police-data-stop-search
+## UK Police Stop and Search Data
+
+### Index template for police-data-stop-search
 To make full use of the ingested stop and search data, the [police-data-stop-search.json](Elasticsearch/templates/police-data-stop-search.json) index template should be installed in the target Elasticsearch cluster.
 
 
@@ -136,8 +139,7 @@ PUT _index_template/police_data_stop_search_template
 ```
 </details>
 
-## Using Logstash to ingest the data
-Firstly, download the required data sets as per the guidance given above, unzip to a location of your choice and then follow each of the steps below:
+## Configuring Logstash to ingest stop-and-search data
 
 ### Examine fhe file and folder structure
 The data is downloaded in a single .zip file per download that contains a number of folders for each month/year, with a number of CSV files per force for the same period in each month folder. For example, given a download containing data for 2022:
