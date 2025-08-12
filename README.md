@@ -135,9 +135,10 @@ PUT _index_template/police_data_stop_search_template
 ```
 </details>
 
-## Determine the required data files for ingest
+## Running Logstash to ingest the data
 Download the required data as per the guidance given above  
 
+### Examine fhe file and folder structure
 The data is downloaded in a single .zip file per download that contains a number of folders for each month/year, with a number of CSV files per force for the same period in each month folder. For example, given a download containing data for 2022:
 - Folders in the downloaded .zip file will be of the format YYYY-MM, i.e. for 2022 it will be 2022-01 through to 2022-12
 - For each Force, there are up to three CSV files for each month, for each of Street, Outcomes and Stop-and-search data
@@ -151,11 +152,7 @@ To illustrate the file structure, the structure for 2022 is shown in the image b
 
 <img width="876" height="562" alt="image" src="https://github.com/user-attachments/assets/599d41e0-4519-443d-b083-5f9e8b2d8ff4" />
 
-    
-## Logstash Pipelines
-
-## Running Logstash to ingest the data
-### Ingesting stop-and-search data
+### Determine the required data files for ingest
 Assuming the Police data has been unzipped to `/opt/data/UK/Police/crime-data`, the following file input path combinations can be used to ingest stop-and-search data to Elasticsearch using Logstash. The CSV files themselves will be of the format:
 - `/opt/data/UK/Police/crime-data/YYYY-MM/YYYY-MM-<force_name>-stop-and-search.csv`
 
@@ -172,10 +169,11 @@ Any required combinations of the above can be configured as file input paths
 > Logstash is designed to keep running and monitor configured input paths for any new data. In this instance once the relevant data has been ingested, there will obviously be no new data so Logstash will keep running whilst not actually processing anything. It is therefore advised to monitor Logstash output (e.g. to stdout, tailing the log file, etc) and kill the Logstash process once it has been determined that all data has been loaded.
 > Alternatively, use Kibana Discover to check the data that's been ingested for the requried date range and kill the Logstash process accordingly.
 
-### Ingesting into a single Elasticsearch cluster
+### Ingesting stop-and-search data
+#### Ingesting into a single Elasticsearch cluster
 
 
-### Ingesting into an Elastic Data Mesh
+#### Ingesting into an Elastic Data Mesh
 
 
 
