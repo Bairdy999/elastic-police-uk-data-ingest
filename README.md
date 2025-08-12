@@ -135,7 +135,7 @@ PUT _index_template/police_data_stop_search_template
 ```
 </details>
 
-## Running Logstash to ingest the data
+## Using Logstash to ingest the data
 Firstly, download the required data sets as per the guidance given above, unzip to a location of your choice and then follow each of the steps below:
 
 ### Examine fhe file and folder structure
