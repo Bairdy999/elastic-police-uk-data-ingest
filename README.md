@@ -22,27 +22,10 @@ Given the public nature of the data, the data content itself (including geopoint
 Additionally, given the segmented nature of the data into discrete data sets per UK Police Force, it is ideal for use in proof-of-concepts relating to implementing an [Elastic Data Mesh](https://github.com/Bairdy999/elastic-data-mesh). Data specific to a given Force can be ingested into each Elasticsearch cluster in such a data mesh and cross-cluster-search utilised to search across the data in all clusters in the data mesh.
 
 
+# Ingesting UK Police data into Elasticsearch
 
-# Preparing UK Police data for ingest
-
-## Data file and folder structure
-Download the required data as per the guidance given above  
-
-The data is downloaded in a single .zip file per download that contains a number of folders for each month/year, with a number of CSV files per force for the same period in each month folder. For example, given a download containing data for 2022:
-- Folders in the downloaded .zip file will be of the format YYYY-MM, i.e. for 2022 it will be 2022-01 through to 2022-12
-- For each Force, there are up to three CSV files for each month, for each of Street, Outcomes and Stop-and-search data
-- The CSV files are of the format YYYY-MM-<force_name><data_type>.csv, e.g for Cambridgeshire, the following files will exist:
-  - `2022-01-cambridgeshire-outcomes.csv`
-  - `2022-01-cambridgeshire-stop-and-search.csv`
-  - `2022-01-cambridgeshire-street.csv`
-- The above is repeated for each Force in each month/year folder
-
-To illustrate the file structure, the structure for 2022 is shown in the image below:  
-
-<img width="876" height="562" alt="image" src="https://github.com/user-attachments/assets/599d41e0-4519-443d-b083-5f9e8b2d8ff4" />
-
-# Elastic Stack Artefacts
-## Index Templates
+## Elasticsearch Index Templates
+### Index template for police-data-stop-search
 [police-data-stop-search.json](Elasticsearch/templates/police-data-stop-search.json)
 <details>
   <summary>police-data-stop-search.json</summary>
@@ -151,6 +134,23 @@ PUT _index_template/police_data_stop_search_template
 }
 ```
 </details>
+
+## Determine the required data files for ingest
+Download the required data as per the guidance given above  
+
+The data is downloaded in a single .zip file per download that contains a number of folders for each month/year, with a number of CSV files per force for the same period in each month folder. For example, given a download containing data for 2022:
+- Folders in the downloaded .zip file will be of the format YYYY-MM, i.e. for 2022 it will be 2022-01 through to 2022-12
+- For each Force, there are up to three CSV files for each month, for each of Street, Outcomes and Stop-and-search data
+- The CSV files are of the format YYYY-MM-<force_name><data_type>.csv, e.g for Cambridgeshire, the following files will exist:
+  - `2022-01-cambridgeshire-outcomes.csv`
+  - `2022-01-cambridgeshire-stop-and-search.csv`
+  - `2022-01-cambridgeshire-street.csv`
+- The above is repeated for each Force in each month/year folder
+
+To illustrate the file structure, the structure for 2022 is shown in the image below:  
+
+<img width="876" height="562" alt="image" src="https://github.com/user-attachments/assets/599d41e0-4519-443d-b083-5f9e8b2d8ff4" />
+
     
 ## Logstash Pipelines
 
