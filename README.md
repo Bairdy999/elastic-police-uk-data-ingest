@@ -153,7 +153,7 @@ To illustrate the file structure, the structure for 2022 is shown in the image b
 <img width="876" height="562" alt="image" src="https://github.com/user-attachments/assets/599d41e0-4519-443d-b083-5f9e8b2d8ff4" />
 
 ### Determine the required data files for ingest
-Assuming the Police data has been unzipped to `/opt/data/UK/Police/crime-data`, the following file input path combinations can be used to ingest stop-and-search data to Elasticsearch using Logstash. The CSV files themselves will be of the format:
+Assuming the Police data has been unzipped to `/opt/data/UK/Police/crime-data`, the following example file input path combinations (not exhaustive!) can be used to ingest stop-and-search data to Elasticsearch using Logstash. The CSV files themselves will be of the format:
 - `/opt/data/UK/Police/crime-data/YYYY-MM/YYYY-MM-<force_name>-stop-and-search.csv`
 
 | File Input Path | Files Matched |
