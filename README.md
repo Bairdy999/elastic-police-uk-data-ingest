@@ -25,7 +25,7 @@ Additionally, given the segmented nature of the data into discrete data sets per
 # Ingesting UK Police data into Elasticsearch
 Firstly, download the required data sets as per the guidance given above, unzip to a location of your choice and then follow each of the steps below:
 
-### Examine fhe file and folder structure
+## Examine fhe file and folder structure
 The data is downloaded in a single .zip file per download that contains a number of folders for each month/year, with a number of CSV files per force for the same period in each month folder. For example, given a download containing data for 2022:
 - Folders in the downloaded .zip file will be of the format YYYY-MM, i.e. for 2022 it will be 2022-01 through to 2022-12
 - For each Force, there are up to three CSV files for each month, for each of Street, Outcomes and Stop-and-search data
