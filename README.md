@@ -1,8 +1,8 @@
 # UK Policing - Public Domain Data
-The UK Police Service, via the UK Home Office, makes a number of policing-related data sets available publically for download. These data sets are (usually) available for all 43 Forces in England and Wales and consist of the following three types of data:
-- Reported crimes for a given location, in a given period per Force 
-- Crime outcomes for all crimes reported in a given period per Force
-- Stop-and-search statistics recorded in a given period by each Force
+The UK Police Service, via the UK Home Office, makes a number of policing-related data sets available publically for download. These data sets are (usually) available for all 43 Police Forces in England and Wales and consist of the following three types of data:
+- Reported crimes for a given location, in a given period per Police Force 
+- Crime outcomes for all crimes reported in a given period per Police Force
+- Stop-and-search statistics recorded in a given period by each Police Force
 
 ## Downloading UK Police Data
 Data can be downloaded from the following links:
