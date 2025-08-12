@@ -152,13 +152,22 @@ To illustrate the file structure, the structure for 2022 is shown in the image b
 
 
 ## Running Logstash to ingest the data
-
-Assuming the Police data has been unzipped to `/opt/data/UK/Police/crime-data`, the following file input path combinations can be used to ingest the data to Elasticsearch using Logstash. The CSV files themselves will be of the format:
-- `/opt/data/UK/Police/crime-data/YYYY-MM/YYYY-MM-<force_name>-<data_type).csv`
+### Ingesting stop-and-search data
+Assuming the Police data has been unzipped to `/opt/data/UK/Police/crime-data`, the following file input path combinations can be used to ingest stop-and-search data to Elasticsearch using Logstash. The CSV files themselves will be of the format:
+- `/opt/data/UK/Police/crime-data/YYYY-MM/YYYY-MM-<force_name>-stop-and-search.csv`
 
 | File Input Path | Files Matched |
 | -- | -- |
-!     `/opt/data/UK/Police/crime-data/*/*-stop-and-search.csv` | Stop-and-search CSV files for all Forces, for all year/month periods  | 
+! `/opt/data/UK/Police/crime-data/*/*-stop-and-search.csv` | Stop-and-search CSV files for all Forces, for all available year/month periods |
+! `/opt/data/UK/Police/crime-data/2022*/*-stop-and-search.csv` | Stop-and-search CSV files for all Forces, for all months in 2022 |
+! `/opt/data/UK/Police/crime-data/2022-01/*-stop-and-search.csv` | Stop-and-search CSV files for all Forces, for January 2022 |
+! `/opt/data/UK/Police/crime-data/*/*-cambridgeshire-stop-and-search.csv` | Stop-and-search CSV files for Cambridgeshire only, for all available year/month periods |
+! `/opt/data/UK/Police/crime-data/2022*/*-cambridgeshire-stop-and-search.csv` | Stop-and-search CSV files for Cambridgeshire only, for all months in 2022 |  
+
+Any required combinations of the above can be configured as file input paths
+> [!IMPORTANT]
+> Logstash is designed to keep running and monitor configured input paths for any new data. In this instance once the relevant data has been ingested, there will obviously be no new data so Logstash will keep running whilst not actually processing anything. It is therefore advised to monitor Logstash output (e.g. to stdout, tailing the log file, etc) and kill the Logstash process once it has been determined that all data has been loaded.
+> Alternatively, use Kibana Discover to check the data that's been ingested for the requried date range and kill the Logstash process accordingly.
 
 ### Ingesting into a single Elasticsearch cluster
 
