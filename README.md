@@ -171,6 +171,7 @@ Assuming the Police data has been unzipped to `/opt/data/UK/Police/crime-data`, 
 
 Any required combinations of the above can be configured as file input paths
 ### Ingesting stop-and-search data
+Configure Logstash depending on whether the data is to be ingested into a single Elasticsearch cluster, or into a number of clusters that are part of a data mesh, as detailed below. Then run Logstash one or more times to ingest the data as required.
 
 > [!IMPORTANT]
 > Logstash is designed to keep running and monitor configured input paths for any new data. In this instance once the relevant data has been ingested, there will obviously be no new data so Logstash will keep running whilst not actually processing anything. It is therefore advised to monitor Logstash output (e.g. to stdout, tailing the log file, etc) and kill the Logstash process once it has been determined that all data has been loaded.
