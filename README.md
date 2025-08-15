@@ -184,7 +184,7 @@ To ingest data into a single cluster configure Logstash as follows:
 - Output: Elasticsearch cluster with apppropiate credentials supplied
   
 #### Ingesting into an Elastic Data Mesh
-To ingest data into a number of data mesh clustes configure Logstash as follows:
+To ingest data into a number of data mesh clusters configure Logstash as follows:
 - Input: for each cluster, the file path(s) for a single Force as per File Input Path above
 - Output: for each Elasticsearch cluster, URL and credentials relevant to each cluster
   
