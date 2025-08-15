@@ -154,8 +154,8 @@ PUT _index_template/police_data_stop_search_template
 </details>
 
 ## Configuring Logstash to ingest stop-and-search data
-Firstly, configure the Logstash [pipelines.yml](Logstash/pipelines.yml) file to create a pipeline as defined in [police-stop-search-pipeline.yml](Logstash/police-stop-search-pipeline.yml)
-
+Configure the Logstash [pipelines.yml](Logstash/pipelines.yml) file to create a pipeline as defined in [police-stop-search-pipeline.yml](Logstash/police-stop-search-pipeline.yml)
+Then determine the input path configuration to be added as described below:
 
 ### Determine the required data files for ingest
 Assuming the Police data has been unzipped to `/opt/data/UK/Police/crime-data`, the following example file input path combinations (not exhaustive!) can be used to ingest stop-and-search data to Elasticsearch using Logstash. The CSV files themselves will be of the format:
