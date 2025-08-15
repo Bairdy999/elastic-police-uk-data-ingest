@@ -154,7 +154,7 @@ PUT _index_template/police_data_stop_search_template
 </details>
 
 ## Configuring Logstash to ingest stop-and-search data
-Firstly, configure the Logstash [pipelines.yml](Logstash/pipelines.yml) file to create a pipeline as defined in [police-stop-search-pipeline.yml](police-stop-search-pipeline.yml)
+Firstly, configure the Logstash [pipelines.yml](Logstash/pipelines.yml) file to create a pipeline as defined in [police-stop-search-pipeline.yml](Logstash/police-stop-search-pipeline.yml)
 
 
 ### Determine the required data files for ingest
