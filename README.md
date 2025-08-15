@@ -179,12 +179,15 @@ Any required combinations of the above can be configured as file input paths
 > There's probably a way of wrapping the Logstash ingest runs in a shell script, read the required data files and pass to Logstash via a stdin input, or to have Logstash listen on an HTTP input and process/terminate accordingly. Answers on a postcard please!!
 
 #### Ingesting into a single Elasticsearch cluster
-
-
+To ingest data into a single cluster configure Logstash as follows:
+- Input: file path(s) as per File Input Path above
+- Output: Elasticsearch cluster with apppropiate credentials supplied
+  
 #### Ingesting into an Elastic Data Mesh
-
-
-
+To ingest data into a number of data mesh clustes configure Logstash as follows:
+- Input: for each cluster, the file path(s) for a single Force as per File Input Path above
+- Output: for each Elasticsearch cluster, URL and credentials relevant to each cluster
+  
 ## UK Police Street (Crime Locations) Data
 Coming soon!  
   
